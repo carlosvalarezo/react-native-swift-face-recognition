@@ -58,7 +58,9 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
       videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect
       videoPreviewLayer.frame = testView.layer.bounds
       //testView.layer.addSublayer(videoPreviewLayer)
-      playVideo(url: "MacNCheeseStirring_Short", view: testView)
+      //CArgar el video
+      //playVideo(url: "MacNCheeseStirring_Short", view: testView)
+      playVideo(url: "bubble_i3", view: testView)
       
       captureSession.startRunning()
       let outputFileName = NSUUID().uuidString
@@ -71,7 +73,7 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
       /*fin guardar archivos*/
       movieOutput.startRecording(toOutputFileURL: fileUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
       
-      DispatchQueue.main.asyncAfter(deadline: .now() + 10) { // change 2 to desired number of seconds
+      DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // change 2 to desired number of seconds
         print("detenido...")
         self.movieOutput.stopRecording()
       }
@@ -95,6 +97,7 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
     avPlayerController.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
     
     //  hide show control
+    avPlayerController.videoGravity = AVLayerVideoGravityResizeAspectFill
     avPlayerController.showsPlaybackControls = false
     // play video
     

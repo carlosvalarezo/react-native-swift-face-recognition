@@ -352,8 +352,6 @@
 		C02261242093BB480091873F /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		C02261262093BB610091873F /* CameraViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewManager.swift; sourceTree = "<group>"; };
 		C02261282093BB7C0091873F /* CameraViewModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraViewModule.m; sourceTree = "<group>"; };
-		C022612A2093BF330091873F /* Biking_Girl_Alpha.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Biking_Girl_Alpha.mov; path = resources/Biking_Girl_Alpha.mov; sourceTree = "<group>"; };
-		C022612E2093CF740091873F /* SeveralAnimals.mp4 */ = {isa = PBXFileReference; lastKnownFileType = text; name = SeveralAnimals.mp4; path = resources/SeveralAnimals.mp4; sourceTree = "<group>"; };
 		C02261302093D1110091873F /* bubbles_i3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = bubbles_i3.mp4; path = resources/bubbles_i3.mp4; sourceTree = "<group>"; };
 		C02261322093D2020091873F /* MacNCheeseStirring_Short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = MacNCheeseStirring_Short.mp4; path = resources/MacNCheeseStirring_Short.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -592,8 +590,6 @@
 			children = (
 				C02261322093D2020091873F /* MacNCheeseStirring_Short.mp4 */,
 				C02261302093D1110091873F /* bubbles_i3.mp4 */,
-				C022612E2093CF740091873F /* SeveralAnimals.mp4 */,
-				C022612A2093BF330091873F /* Biking_Girl_Alpha.mov */,
 				13B07FAE1A68108700A75B9A /* reactSwiftRevenge */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* reactSwiftRevengeTests */,
