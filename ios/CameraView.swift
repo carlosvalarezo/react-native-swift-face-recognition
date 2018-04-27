@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 import AVFoundation
 
 class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
@@ -15,7 +16,6 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
   var movieOutput = AVCaptureMovieFileOutput()
   
   var videoPreviewLayer = AVCaptureVideoPreviewLayer()
-  
   
   public var screenWidth: CGFloat {
     return UIScreen.main.bounds.width
@@ -32,10 +32,10 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
     
     
     let testView : UIView = UIView(frame: testFrame)
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
+    /* let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
                                       height: 50))
     label.text = "This is Swift"
-    self.addSubview(label)
+    self.addSubview(label) */
     self.addSubview(testView)
     
     print("grabando...")
@@ -57,7 +57,9 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
       videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
       videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect
       videoPreviewLayer.frame = testView.layer.bounds
-      testView.layer.addSublayer(videoPreviewLayer)
+      //testView.layer.addSublayer(videoPreviewLayer)
+      playVideo(url: "MacNCheeseStirring_Short", view: testView)
+      
       captureSession.startRunning()
       let outputFileName = NSUUID().uuidString
       // let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
@@ -79,6 +81,25 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
     } catch {
       print(error)
     }
+  }
+  
+  func playVideo(url: String, view: UIView){
+    let filepath: String? = Bundle.main.path(forResource: url, ofType: ".mp4")
+    let fileURL = URL.init(fileURLWithPath: filepath!)
+    
+    let avPlayer = AVPlayer(url: fileURL)
+    let avPlayerController = AVPlayerViewController()
+    
+    avPlayerController.player = avPlayer
+    
+    avPlayerController.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+    
+    //  hide show control
+    avPlayerController.showsPlaybackControls = false
+    // play video
+    
+    avPlayerController.player?.play()
+    view.addSubview(avPlayerController.view)
   }
   
   func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {

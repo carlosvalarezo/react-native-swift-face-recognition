@@ -8,7 +8,6 @@
 
 import Foundation
 
-@available(iOS 10.0, *)
 @objc(CameraViewManager)
 class CameraViewManager : RCTViewManager {
   
