@@ -17,6 +17,8 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
   
   var videoPreviewLayer = AVCaptureVideoPreviewLayer()
   
+  var avPlayerViewController = AVPlayerViewController()
+  
   public var screenWidth: CGFloat {
     return UIScreen.main.bounds.width
   }
@@ -33,9 +35,9 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
     
     let testView : UIView = UIView(frame: testFrame)
     /* let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
-                                      height: 50))
-    label.text = "This is Swift"
-    self.addSubview(label) */
+     height: 50))
+     label.text = "This is Swift"
+     self.addSubview(label) */
     self.addSubview(testView)
     
     print("grabando...")
@@ -60,7 +62,7 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
       //testView.layer.addSublayer(videoPreviewLayer)
       //CArgar el video
       //playVideo(url: "MacNCheeseStirring_Short", view: testView)
-      playVideo(url: "bubble_i3", view: testView)
+      avPlayerViewController = playVideo(url: "MacNCheeseStirring_Short", view: testView)
       
       captureSession.startRunning()
       let outputFileName = NSUUID().uuidString
@@ -73,9 +75,23 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
       /*fin guardar archivos*/
       movieOutput.startRecording(toOutputFileURL: fileUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
       
-      DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // change 2 to desired number of seconds
-        print("detenido...")
+      DispatchQueue.main.asyncAfter(deadline: .now() + 8) { // change 2 to desired number of seconds
+        
         self.movieOutput.stopRecording()
+        self.avPlayerViewController.player?.pause()
+        
+        //testView.window?.rootViewController?.navigationController?.navigationBar.backItem?.backBarButtonItem childViewControllers[1].dismiss(animated: true, completion: nil)
+        
+        
+        
+        
+
+        
+        
+        
+        
+        //self.switchRootViewController(rootViewController: navigationController!, animated: true, completion: nil)
+        print("detenido...")
       }
       
       
@@ -85,7 +101,7 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
     }
   }
   
-  func playVideo(url: String, view: UIView){
+  func playVideo(url: String, view: UIView) -> AVPlayerViewController{
     let filepath: String? = Bundle.main.path(forResource: url, ofType: ".mp4")
     let fileURL = URL.init(fileURLWithPath: filepath!)
     
@@ -103,6 +119,7 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
     
     avPlayerController.player?.play()
     view.addSubview(avPlayerController.view)
+    return avPlayerController;
   }
   
   func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
@@ -117,7 +134,7 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
   }
   
   func getDevice(position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-    let devices: NSArray = AVCaptureDevice.devices() as! NSArray;
+    let devices: NSArray = AVCaptureDevice.devices()! as NSArray;
     for de in devices {
       let deviceConverted = de as! AVCaptureDevice
       if(deviceConverted.position == position){
@@ -125,6 +142,12 @@ class CameraView: UIView, AVCaptureFileOutputRecordingDelegate {
       }
     }
     return nil
+  }
+}
+
+extension UINavigationController {
+  var rootViewController : UIViewController? {
+    return viewControllers.first
   }
 }
 
